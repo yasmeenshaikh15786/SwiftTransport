@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "919541125459",
+    "firebase_url": "https://nebula-connect.firebaseio.com",
+    "project_id": "nebula-connect",
+    "storage_bucket": "nebula-connect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919541125459:android:606fad1ceb7090ea",
+        "android_client_info": {
+          "package_name": "com.nebula.connect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919541125459-l8k21uiekr4a7nimk8a4gq49k19k7kf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB20I6itKNAjmMiTp_3phXUinOOfQvRoko"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

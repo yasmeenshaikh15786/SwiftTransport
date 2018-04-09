@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:id="@+id/linear1"
+            android:weightSum="15"
+            android:background="@color/colorLight"
+            android:alpha="0.8">
+            <TextView
+                android:id="@+id/shop_photo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.5"
+                android:text="Report Card Front"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="#3a3a3a"
+                android:gravity="center"/>
+            <ImageView
+                android:adjustViewBounds="true"
+                android:id="@+id/front_img"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_weight="3"
+                android:layout_gravity="center"
+                android:onClick="onClickImg"
+                android:src="@mipmap/empty_image"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="3">
+                <ImageView
+                    android:id="@+id/add_front"
+                    android:onClick="onClickImg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:padding="15dp"
+                    android:background="@mipmap/cam_one"/>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/purchase"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/separator"
+            android:layout_alignBottom="@+id/linear1"
+            android:background="@color/list_txt" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:id="@+id/linear2"
+            android:weightSum="15"
+            android:background="@color/colorLight"
+            android:alpha="0.8">
+            <TextView
+                android:id="@+id/slip_photo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.5"
+                android:text="Report Card Back"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="#3a3a3a"
+                android:gravity="center"/>
+            <ImageView
+                android:adjustViewBounds="true"
+                android:id="@+id/back_img"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_weight="3"
+                android:layout_gravity="center"
+                android:onClick="onClickImg"
+                android:src="@mipmap/empty_image"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="3">
+                <ImageView
+                    android:id="@+id/add_back"
+                    android:onClick="onClickImg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:padding="15dp"
+                    android:background="@mipmap/cam_one"/></LinearLayout>
+            <TextView
+                android:id="@+id/statusback"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/purchase"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

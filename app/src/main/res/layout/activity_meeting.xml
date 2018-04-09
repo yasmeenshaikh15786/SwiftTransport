@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/brand"
+            android:padding="3dp"
+            android:alpha="0.9">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="4dp"
+                    android:text="Meeting ID: " />
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:id="@+id/meeting_id"
+                    style="@style/list_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/txt"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="1dp"
+                    android:text="001" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="1dp">
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="4dp"
+                    android:text="Estimated attendance: " />
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:id="@+id/estimated_attend"
+                    style="@style/list_txt"
+                    android:textColor="@color/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="1dp"
+                    android:text="80" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="1dp">
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="4dp"
+                    android:text="Meeting Location: " />
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:id="@+id/location"
+                    style="@style/list_txt"
+                    android:textColor="@color/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="1dp"
+                    android:text="80" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="4dp"
+                    android:text="Meeting Type: " />
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:id="@+id/meet_type"
+                    style="@style/list_txt"
+                    android:textColor="@color/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="1dp"
+                    android:text="80" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:weightSum="10"
+            android:background="@drawable/bg_small_one">
+           <!-- <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:src="@android:color/transparent"/>-->
+            <TextView
+                android:id="@+id/meet_start_txt"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:text="Meeting Start"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_weight="8.7"
+                android:textColor="@color/colorLight"
+                android:onClick="onClick"
+              />
+            <ImageView
+                android:id="@+id/ms_img"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.3"
+                android:visibility="invisible"
+                android:src="@mipmap/verified"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:weightSum="10"
+            android:background="@drawable/bg_small_two">
+            <TextView
+                android:id="@+id/meet_photo_txt"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:text="Meeting Photos"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:layout_weight="8.7"
+                android:textColor="@color/colorLight"
+                />
+            <ImageView
+                android:id="@+id/mp_img"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.3"
+                android:visibility="invisible"
+                android:src="@mipmap/verified"/>
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_small_three"
+        android:weightSum="10">
+            <TextView
+                android:id="@+id/meet_detail_txt"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:text="Meeting Details"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_weight="8.7"
+                android:onClick="onClick"
+                android:textColor="@color/colorLight"
+               />
+        <ImageView
+            android:id="@+id/md_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.3"
+            android:visibility="invisible"
+            android:src="@mipmap/verified"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:weightSum="10"
+        android:background="@drawable/bg_small_four">
+
+        <TextView
+            android:id="@+id/painter_data_txt"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="8.7"
+            android:text="Attendee Data"
+            android:textSize="20sp"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:textColor="@color/colorLight" />
+        <ImageView
+            android:id="@+id/pd_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.3"
+            android:visibility="invisible"
+            android:src="@mipmap/verified"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>
