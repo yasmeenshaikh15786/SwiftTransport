@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by siddhesh on 7/22/16.
  */
-public class    SaleMetadataEntity implements Serializable {
+public class  SaleMetadataEntity implements Serializable {
 
     public int m_id;
     public int transaction_id;

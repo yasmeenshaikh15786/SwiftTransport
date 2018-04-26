@@ -81,9 +81,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
-                        android:inputType="phone"
-                        android:maxLength="10"
-                        android:digits="1234567890"
+                        android:inputType="textCapWords"
                         android:singleLine="true"
                         android:id="@+id/business_started_year"
                         style="@style/details_txt"/>

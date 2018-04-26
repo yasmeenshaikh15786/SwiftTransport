@@ -42,6 +42,8 @@ public class MeetingDetailsActivity extends AppCompatActivity implements Adapter
     String[] meetItems;
     private  String painAttend,totGifts,nonParticipant;
     private EditText remark1,remark2;
+    PlanningEntity entity;
+    TextView textView_meetinId,textView_estimatedAttendence,textView_meetingType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,30 @@ public class MeetingDetailsActivity extends AppCompatActivity implements Adapter
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         getSupportActionBar().setTitle("Meeting Details");
-        ((TextView)findViewById(R.id.meeting_id)).setText(getIntent().getStringExtra("meet_code"));
+
+        int planningId = getIntent().getIntExtra("plan_id",0);
+
+        entity = SelectQueries.getPlanningById(this, planningId);
+
+        String meetCode = entity.meetingCode;
+        String estimated = entity.estimateAttendance;
+        String meettype = entity.meetingType;
+        String str_remark1  = entity.planning_field4;
+        String str_remark2  = entity.planning_field5;
+
+
+
+      /*  ((TextView)findViewById(R.id.meeting_id)).setText(getIntent().getStringExtra("meet_code"));
         ((TextView)findViewById(R.id.estimated_attend)).setText(getIntent().getStringExtra("estimate_attend"));
         ((TextView)findViewById(R.id.meet_type)).setText(getIntent().getStringExtra("meet_type"));
+
+
+        String str_remark1 = (getIntent().getStringExtra("remark1"));
+        String str_remark2 = (getIntent().getStringExtra("remark2"));
+*/
+
+
+
         planId = getIntent().getStringExtra("meet_id");
         painterAttend = (EditText) findViewById(R.id.painter_attend);
         totalGifts = (EditText) findViewById(R.id.total_gifts);
@@ -63,9 +86,37 @@ public class MeetingDetailsActivity extends AppCompatActivity implements Adapter
         remark2 = (EditText) findViewById(R.id.remark2);
         otherLayout = (LinearLayout) findViewById(R.id.new_type);
         typeSpin= (Spinner) findViewById(R.id.type);
+        textView_meetinId = (TextView)findViewById(R.id.meeting_id);
+        textView_estimatedAttendence = (TextView)findViewById(R.id.estimated_attend);
+        textView_meetingType = (TextView)findViewById(R.id.meet_type);
+
+        textView_meetinId.setText(meetCode);
+        textView_estimatedAttendence.setText(estimated);
+        textView_meetingType.setText(meettype);
+        if (str_remark1 != null)
+        {
+            remark1.setText(str_remark1);
+        }else {
+            remark1.setText("");
+        }
+        if (str_remark2 != null)
+        {
+            remark2.setText(str_remark2);
+
+        }else {
+
+            remark2.setText("");
+        }
+
+
+
+
+
         typeSpin.setEnabled(false);
         typeSpin.setFocusable(false);
         initializeSpinner(typeSpin);
+
+
 
     }
 
@@ -87,6 +138,8 @@ public class MeetingDetailsActivity extends AppCompatActivity implements Adapter
             painterAttend.setText(entity.painterAttendance);
             totalGifts.setText(entity.totalGiftsGiven);
             nonParticipants.setText(entity.nonParticipants);
+            remark1.setText(entity.meeting_field4);
+            remark2.setText(entity.meeting_field5);
 
             selectSpinnerValue(typeSpin,entity.meeting_field1, lastPosition);
             newMeetingType.setText(entity.meeting_field2);
@@ -95,6 +148,8 @@ public class MeetingDetailsActivity extends AppCompatActivity implements Adapter
             painterAttend.setText("");
             totalGifts.setText("");
             nonParticipants.setText("");
+            remark1.setText("");
+            remark2.setText("");
             String meetType = getIntent().getStringExtra("meet_type");
             newMeetingType.setText(entity.meeting_field2);
             selectSpinnerValue(typeSpin,meetType, lastPosition);

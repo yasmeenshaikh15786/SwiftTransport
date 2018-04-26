@@ -329,23 +329,73 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 zipFilePath=Constants.fldr+System.currentTimeMillis()+".zip";
                 generateZipFile();
-                Uri uri = Uri.fromFile(new File(zipFilePath));
-                Intent emailIntent=new Intent(Intent.ACTION_SEND);
 
-                TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            //NOTIFIICATION Library Zip File
+            String notification_library_zipFilePath = null;
+            try {
+                notification_library_zipFilePath = B1SNotifications.zipLogFileB1SNotifications(getBaseContext());
+            } catch (SetupIncompleteException e) {
+                Logger.d(TAG,"SetupIncompleteException in Notification");
+                e.printStackTrace();
+            }
 
-                String imeiNumber = telephonyManager.getDeviceId()==null?"N.A.":telephonyManager.getDeviceId();
-                String subject = "Nebula Connect Tech-Support log: "+imeiNumber;
-                //String body = SelectQueries.getSetting(this, Settings.USER_ID)+" requesting a tech-support call as <Please mention reason here>";
+            //METADATA Library Zip File
+            String metadata_lib_zipFilePath= null;
+            try {
+                metadata_lib_zipFilePath = B1SMETADATA.zipLogFileB1SMetadata(getBaseContext());
+            }catch (com.bizonesoft.metadatainfo.SetupIncompleteException e)
+            {
+                Logger.d(TAG,"SetupIncompleteException in Metadata");
+                e.printStackTrace();
+            }
 
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"support@bizonesoft.com"});
-                emailIntent.putExtra(Intent.EXTRA_STREAM,uri);
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                // emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-                emailIntent.setType("text/plain");
-                startActivity(emailIntent);
+            Uri uri = Uri.fromFile(new File(zipFilePath));
+            Uri notification_uri = null,metadata_uri= null;
+            if (notification_library_zipFilePath!=null){
+                notification_uri = Uri.fromFile(new File(notification_library_zipFilePath));
+            }
+            if (metadata_lib_zipFilePath!=null){
+                metadata_uri = Uri.fromFile(new File(metadata_lib_zipFilePath));
+            }
+
+            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return false;
+            }
+            String imeiNumber = telephonyManager.getDeviceId() == null ? "N.A." : telephonyManager.getDeviceId();
+            String subject = "Nebula Connect Tech-Support log: " + imeiNumber;
+            //Intent send = new Intent(Intent.ACTION_SENDTO);
+            //String uriText = "mailto:" + Uri.encode("support@fmgizmo.com") + "?subject=" + Uri.encode(subject);
+            //Uri uri1 = Uri.parse(uriText);
+            //send.setData(uri1);
+            ArrayList<Uri> uris = new ArrayList<>();
+            uris.add(uri);
+            if (notification_uri!=null)
+                uris.add(notification_uri);
+            if (metadata_uri!=null)
+                uris.add(metadata_uri);
+//                send.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+            //startActivity(Intent.createChooser(send, "Send mail..."));
+
+            final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND_MULTIPLE);
+            emailIntent.setType("plain/text");
+
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"support@bizonesoft.com"});
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+
+            startActivity(Intent.createChooser(emailIntent, "Email:"));
 
             return true;
+
+
 
         } else if(id == R.id.sync){
             if(ContextCommons.isOnline(this)) {

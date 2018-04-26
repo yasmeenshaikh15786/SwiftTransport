@@ -150,7 +150,10 @@ public abstract class GetPlanningTask extends AsyncTask<Void, Void, Boolean> {
                 entity.asmContact = routeJson.getString("asm_contact");
                 entity.dsmName = routeJson.getString("dsm_name");
                 entity.dsmContact = routeJson.getString("dsm_contact");
+                entity.planning_field4 = routeJson.getString("remark_1");
+                entity.planning_field5 = routeJson.getString("remark_2");
                 String status = routeJson.getString("meeting_status");
+
                 if("2".equals(status) ||"0".equals(status)){
                     entity.status = Constants.OPEN;
                 }else if("1".equals(status)){

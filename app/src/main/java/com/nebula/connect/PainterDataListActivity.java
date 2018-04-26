@@ -46,7 +46,6 @@ public class PainterDataListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_painterdata_list);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         getSupportActionBar().setTitle("Attendee Data");
@@ -55,9 +54,6 @@ public class PainterDataListActivity extends AppCompatActivity {
         actv = (EditText) findViewById(R.id.search_shop);
         noRecord = (TextView) findViewById(R.id.norecord);
         checkLayout = (LinearLayout) findViewById(R.id.checkll);
-
-
-
     }
 
 
@@ -275,6 +271,18 @@ public class PainterDataListActivity extends AppCompatActivity {
                 i.putExtra("dealerName",painterEntities.get(position).dealerName);
                 i.putExtra("mobile",painterEntities.get(position).contact);
                 i.putExtra("plan_id",getIntent().getIntExtra("plan_id",0));
+
+                i.putExtra("bussinessStarted",painterEntities.get(position).business_started_year);
+                i.putExtra("qualification",painterEntities.get(position).qualification);
+                i.putExtra("teamSize",painterEntities.get(position).team_size);
+                i.putExtra("dealerCode",painterEntities.get(position).dealer_code);
+               // i.putExtra("dealerName",painterEntities.get(position).dealername);
+                i.putExtra("dealerContact",painterEntities.get(position).dealer_contact);
+                i.putExtra("orderBooking",painterEntities.get(position).order_booking);
+                i.putExtra("remark1",painterEntities.get(position).remark1);
+                i.putExtra("remark2",painterEntities.get(position).remark2);
+
+
                 startActivity(i);
             }
         });

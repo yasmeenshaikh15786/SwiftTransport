@@ -12,12 +12,16 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +42,8 @@ import com.nebula.connect.queries.InsertQueries;
 import com.nebula.connect.queries.SelectQueries;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
  * Created by Sonam on 22/2/17.
@@ -100,7 +106,7 @@ public class StartDayActivity extends AppCompatActivity {
             startBtn.setText("Start Meeting");
             addImg.setEnabled(true);
             mobEdit.setText("");
-            remarks.setText(planningEntity.trainingCenterName);
+           // remarks.setText(planningEntity.trainingCenterName);
         }
 
         startDisplayBtn.setOnClickListener(new View.OnClickListener() {
@@ -196,14 +202,26 @@ public class StartDayActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (resultCode == Activity.RESULT_OK && requestCode == SHOP_CAMERA) {
+
+
                 String imgPath = "", tag = "";
-                imgPath = outputFileUri.getPath();
+
+                imgPath =  outputFileUri.getPath();
                 Logger.d(TAG, "imgPath=" + imgPath);
+                Logger.d(TAG, "newImgPath=" + imgPath);
                 Commons.decodeFile(imgPath, Constants.IMG_WIDTH, Constants.IMG_HEIGHT);
                 startDayEntity.imagePath = imgPath;
                 startDayEntity.startDate = (int) (System.currentTimeMillis() / 1000L);
                 //   startDayEntity.created=System.currentTimeMillis();
                 // saleMetadataEntities.get(0).tag="shop";
+
+             /*   try {
+                    InputStream ims = getContentResolver().openInputStream(outputFileUri);
+                    // just display image in imageview
+                    shop.setImageBitmap(BitmapFactory.decodeStream(ims));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }*/
                 Bitmap b = BitmapFactory.decodeFile(imgPath);
                 shop.setImageBitmap(Bitmap.createScaledBitmap(b, 150, 150, false));
             }
@@ -359,11 +377,45 @@ public class StartDayActivity extends AppCompatActivity {
     }
 
     public void takePictureShop() {
-        File file = Commons.getOutputMediaFile();
-        outputFileUri = Uri.fromFile(file);
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-        startActivityForResult(cameraIntent, SHOP_CAMERA);
+
+
+        if(Build.VERSION.SDK_INT>=24)
+        {
+            File file = Commons.getOutputMediaFile();
+            Uri uri = FileProvider.getUriForFile(StartDayActivity.this,   StartDayActivity.this.getApplicationContext().getPackageName()+".fileprovider",file);
+            outputFileUri= Uri.fromFile(file.getAbsoluteFile());
+            String path=outputFileUri.getPath();
+            String filepath=file.getAbsolutePath();
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            startActivityForResult(cameraIntent, SHOP_CAMERA);
+
+        }else {
+
+            File file = Commons.getOutputMediaFile();
+            outputFileUri = Uri.fromFile(file);
+            Log.d("outputFileUri", String.valueOf(outputFileUri));
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+            startActivityForResult(cameraIntent, SHOP_CAMERA);
+
+           /* outputFileUri=Uri.fromFile(file);
+            outputFileUri = FileProvider.getUriForFile(StartDayActivity.this, BuildConfig.APPLICATION_ID + ".provider",file);
+            outputFileUri = Uri.fromFile(file);*/
+
+        }
+
+
+
+        StrictMode.VmPolicy.Builder newbuilder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(newbuilder.build());
+
+
+
+
+
+
     }
 
     @Override

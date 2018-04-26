@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/txt_light"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:gravity="center_vertical"
     android:orientation="vertical">
 
     <!-- Login progress -->
@@ -14,7 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:visibility="gone" />
+        android:layout_gravity="center"
+        android:foregroundGravity="center"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/primary_dark"/>
 
     <ScrollView
         android:id="@+id/login_form"
@@ -72,6 +77,8 @@
                 android:paddingTop="50dp"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin">
+
+
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"

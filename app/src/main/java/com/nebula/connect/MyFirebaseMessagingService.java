@@ -1,10 +1,14 @@
 package com.nebula.connect;
 
 import android.content.Intent;
+import android.util.Log;
 
+import com.bizonesoft.B1SNotifications;
+import com.bizonesoft.SetupIncompleteException;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.nebula.connect.logreports.Logger;
+import com.nebula.connect.queries.SelectQueries;
 import com.nebula.connect.queries.UpdateQueries;
 
 import org.json.JSONException;
@@ -45,7 +49,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 }
             }
 
+        }else if (B1SNotifications.NOTIFICATION_FCM_MESSAGE.equals(message)) {
+            // message received from some topic
+            Log.d(TAG, "msg :" + message);
+            final String device_id = SelectQueries.getSetting(getBaseContext(), Settings.DEVICE_ID);
+
+            try {
+                B1SNotifications.fetchB1SNotifications(getBaseContext(),device_id);
+            } catch (SetupIncompleteException e)
+            {
+                e.printStackTrace();
+                Logger.d(TAG,"SetupIncompleteException");
+            }
+
         }
+
     }
 
 }

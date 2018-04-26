@@ -350,6 +350,9 @@ public class MeetingActivity extends AppCompatActivity {
             i.putExtra("estimate_attend",entity.estimateAttendance+"");
             i.putExtra("meet_type",entity.meetingType+"");
             i.putExtra("meet_code",entity.meetingCode+"");
+            i.putExtra("remark1",entity.planning_field4+"");
+            i.putExtra("remark2",entity.planning_field5+"");
+
         } else if (v.getId() == R.id.meet_photo_txt) {
             i = new Intent(MeetingActivity.this, TabPhotoActivity.class);
         }else if (v.getId() == R.id.painter_data_txt) {

@@ -141,6 +141,8 @@ public class InsertQueries {
             initialValues.put(PLANNING_TBL.DSM_NAME, entity.dsmName);
             initialValues.put(PLANNING_TBL.DSM_CONTACT, entity.dsmContact);
             initialValues.put(PLANNING_TBL.PLANNING_FIELD1, entity.remarks);
+            initialValues.put(PLANNING_TBL.PLANNING_FIELD4, entity.planning_field4);
+            initialValues.put(PLANNING_TBL.PLANNING_FIELD5, entity.planning_field5);
             initialValues.put(PLANNING_TBL.STATUS, entity.status);
             retVal = adapter.getDB().insert(PLANNING_TBL.TABLE_NAME, null, initialValues);
         } catch (Exception e) {
@@ -175,6 +177,8 @@ public class InsertQueries {
             initialValues.put(PAINTER_TBL.DEALER_CODE, entity.dealer_code);
             initialValues.put(PAINTER_TBL.DEALER_CONTACT, entity.dealer_contact);
             initialValues.put(PAINTER_TBL.ORDER_BOOKING, entity.order_booking);
+            initialValues.put(PAINTER_TBL.REMARK1, entity.remark1);
+            initialValues.put(PAINTER_TBL.REMARK2, entity.remark2);
             initialValues.put(PAINTER_TBL.PAINTER_FIELD1, entity.painter_field1);
             initialValues.put(PAINTER_TBL.PAINTER_FIELD2, entity.painter_field2);
             initialValues.put(PAINTER_TBL.PAINTER_FIELD3, entity.painter_field3);

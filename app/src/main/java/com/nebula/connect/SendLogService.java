@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
-
 import com.nebula.connect.db.DBAdapter;
 import com.nebula.connect.logreports.Logger;
 import com.nebula.connect.queries.InsertQueries;

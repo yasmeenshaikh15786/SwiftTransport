@@ -273,6 +273,14 @@ public class UpdateQueries {
         initialValues.put(PAINTER_TBL.CONTACT, entity.contact);
         initialValues.put(PAINTER_TBL.DETAIL_START_TIME, entity.detailStartTime);
         initialValues.put(PAINTER_TBL.STATUS, Constants.INPROGRESS);
+        initialValues.put(PAINTER_TBL.BUSINESS_STARTED_YEAR,entity.business_started_year);
+        initialValues.put(PAINTER_TBL.QUALIFICATION,entity.qualification);
+        initialValues.put(PAINTER_TBL.TEAM_SIZE,entity.team_size);
+        initialValues.put(PAINTER_TBL.DEALER_CODE,entity.dealer_code);
+        initialValues.put(PAINTER_TBL.DEALER_CONTACT,entity.dealer_contact);
+        initialValues.put(PAINTER_TBL.ORDER_BOOKING,entity.order_booking);
+        initialValues.put(PAINTER_TBL.REMARK1,entity.remark1);
+        initialValues.put(PAINTER_TBL.REMARK2,entity.remark2);
         initialValues.put(PAINTER_TBL.PAINTER_FIELD1, entity.painter_field1);
         initialValues.put(PAINTER_TBL.PAINTER_FIELD2, entity.painter_field2);
         initialValues.put(PAINTER_TBL.PAINTER_FIELD3, entity.painter_field3);

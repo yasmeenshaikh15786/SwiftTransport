@@ -30,8 +30,8 @@ android {
         applicationId "com.nebula.connect"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.4"
+        versionCode 13
+        versionName "1.13"
         multiDexEnabled true
     }
     buildTypes {
@@ -53,8 +53,6 @@ dependencies {
         transitive = true;
     }
     apply plugin: 'com.google.gms.google-services'
-    compile project(path: ':notifications')
-    compile project(path: ':metadatainfo')
     implementation project(':metadatainfo')
     implementation project(':notifications')
 }

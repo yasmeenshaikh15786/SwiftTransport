@@ -2,6 +2,7 @@ package com.nebula.connect;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
@@ -27,6 +28,8 @@ public class MyFIrebaseInstanceIDService extends FirebaseInstanceIdService {
     public void onTokenRefresh() {
         String fcmToken = FirebaseInstanceId.getInstance().getToken();
         InsertQueries.setSetting(getApplicationContext(), Settings.FCM_TOKEN,fcmToken);
+
+
            new SendFcmTokenTask(getApplicationContext()).execute();
     }
 

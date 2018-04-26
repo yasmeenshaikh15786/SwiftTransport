@@ -8,10 +8,14 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -122,11 +126,44 @@ public class PainterDbFragment  extends Fragment {
     }
 
     public void capturePhoto(){
-        File file = Commons.getOutputMediaFile();
+
+        if(Build.VERSION.SDK_INT>=24)
+        {
+            File file = Commons.getOutputMediaFile();
+            Uri uri = FileProvider.getUriForFile(getActivity(),   getActivity().getApplicationContext().getPackageName()+".fileprovider",file);
+            outputFileUri= Uri.fromFile(file.getAbsoluteFile());
+            String path=outputFileUri.getPath();
+            String filepath=file.getAbsolutePath();
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            startActivityForResult(cameraIntent, PHOTO_SAVED);
+
+        }else {
+
+            File file = Commons.getOutputMediaFile();
+            outputFileUri = Uri.fromFile(file);
+            Log.d("outputFileUri", String.valueOf(outputFileUri));
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+            startActivityForResult(cameraIntent, PHOTO_SAVED);
+
+           /* outputFileUri=Uri.fromFile(file);
+            outputFileUri = FileProvider.getUriForFile(StartDayActivity.this, BuildConfig.APPLICATION_ID + ".provider",file);
+            outputFileUri = Uri.fromFile(file);*/
+
+        }
+
+
+
+        StrictMode.VmPolicy.Builder newbuilder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(newbuilder.build());
+
+      /*  File file = Commons.getOutputMediaFile();
         outputFileUri = Uri.fromFile(file);
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-        startActivityForResult(cameraIntent, PHOTO_SAVED);
+        startActivityForResult(cameraIntent, PHOTO_SAVED);*/
     }
 
     private void imageClick(int position){

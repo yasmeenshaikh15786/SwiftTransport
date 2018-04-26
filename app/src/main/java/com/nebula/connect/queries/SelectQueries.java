@@ -340,7 +340,7 @@ public class SelectQueries {
                         ,PLANNING_TBL.MEETING_CODE,PLANNING_TBL.DATE,PLANNING_TBL.TRAINING_CENTER_NAME,PLANNING_TBL.START_TIME
                         ,PLANNING_TBL.STATE_ID,PLANNING_TBL.VILLAGE_ID,PLANNING_TBL.LOCATION,PLANNING_TBL.ESTIMATE_ATTENDANCE
                         ,PLANNING_TBL.NEROLAC_TSI,PLANNING_TBL.NEROLAC_TSI_CONTACT,PLANNING_TBL.BUDGET_PER_MEET,PLANNING_TBL.ASM_NAME
-                        ,PLANNING_TBL.ASM_CONTACT,PLANNING_TBL.DSM_NAME,PLANNING_TBL.DSM_CONTACT,PLANNING_TBL.MONTH,PLANNING_TBL.STATUS,PLANNING_TBL.PLANNING_FIELD1},
+                        ,PLANNING_TBL.ASM_CONTACT,PLANNING_TBL.DSM_NAME,PLANNING_TBL.DSM_CONTACT,PLANNING_TBL.MONTH,PLANNING_TBL.STATUS,PLANNING_TBL.PLANNING_FIELD1,PLANNING_TBL.PLANNING_FIELD4,PLANNING_TBL.PLANNING_FIELD5},
                 new StringBuffer().append(PLANNING_TBL.PLANNING_ID).append(" = ").append(meetingId).toString(), null,null, null, null);
         int count=cursor.getCount();
         PlanningEntity entity = new PlanningEntity();
@@ -370,6 +370,8 @@ public class SelectQueries {
             entity.month=cursor.getString(21);
             entity.status=cursor.getString(22);
             entity.remarks = cursor.getString(23);
+            entity.planning_field4 = cursor.getString(24);
+            entity.planning_field5 = cursor.getString(25);
             cursor.moveToNext();
         }
         cursor.close();
@@ -612,6 +614,59 @@ public class SelectQueries {
         //adapter.close();
         return entities;
     }
+
+
+    public static synchronized PainterEntity getPainterData(Context context,int planningId) {
+
+        DBAdapter adapter = DBAdapter.getInstance(context);
+        adapter.open();
+        Cursor cursor = adapter.getDB()	.query(PAINTER_TBL.TABLE_NAME, new String[]{PAINTER_TBL.PAINTER_ID
+                        , PAINTER_TBL.PLANNING_ID, PAINTER_TBL.VID, PAINTER_TBL.VILLAGE_ID, PAINTER_TBL.PAINTER_NAME,
+                        PAINTER_TBL.NPP_CODE, PAINTER_TBL.DEALER_NAME,PAINTER_TBL.DEALER_ID, PAINTER_TBL.CONTACT,PAINTER_TBL.DETAIL_START_TIME,
+                        PAINTER_TBL.STATUS,PAINTER_TBL.BUSINESS_STARTED_YEAR,PAINTER_TBL.QUALIFICATION,PAINTER_TBL.TEAM_SIZE,PAINTER_TBL.DEALER_CODE,
+                        PAINTER_TBL.DEALER_CONTACT,PAINTER_TBL.ORDER_BOOKING,PAINTER_TBL.REMARK1,PAINTER_TBL.REMARK2,PAINTER_TBL.PAINTER_FIELD1, PAINTER_TBL.PAINTER_FIELD2,PAINTER_TBL.PAINTER_FIELD3
+                        , PAINTER_TBL.PAINTER_FIELD4,PAINTER_TBL.PAINTER_FIELD5},
+                new StringBuffer().append(PAINTER_TBL.PAINTER_ID).append(" = ").append(planningId).toString(),null,null,null,null,null);
+        int count=cursor.getCount();
+        PainterEntity entity=new PainterEntity();
+        if(count > 0){
+            cursor.moveToFirst();
+            for(int i=0; i<count; i++){
+               /* PainterEntity entity=new PainterEntity();*/
+                entity.painterId=cursor.getInt(0);
+                entity.planningId=cursor.getString(1);
+                entity.vId=cursor.getString(2);
+                entity.villageId=cursor.getString(3);
+                entity.painterName=cursor.getString(4);
+                entity.nppCode=cursor.getString(5);
+                entity.dealerName=cursor.getString(6);
+                entity.dealerId=cursor.getString(7);
+                entity.contact=cursor.getString(8);
+                entity.detailStartTime=cursor.getString(9);
+                entity.status=cursor.getString(10);
+                entity.business_started_year=cursor.getString(11);
+                entity.qualification=cursor.getString(12);
+                entity.team_size=cursor.getString(13);
+                entity.dealer_code=cursor.getString(14);
+                entity.dealer_contact=cursor.getString(15);
+                entity.order_booking=cursor.getString(16);
+                entity.remark1=cursor.getString(17);
+                entity.remark2=cursor.getString(18);
+                entity.painter_field1=cursor.getString(19);
+                entity.painter_field2=cursor.getString(20);
+                entity.painter_field3=cursor.getString(21);
+                entity.painter_field4=cursor.getString(22);
+                entity.painter_field5=cursor.getString(23);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        Logger.d(TAG, "cursor count=" + cursor.getCount());
+        //adapter.close();
+        return entity;
+    }
+
+
 
     public static synchronized ArrayList<String> getPainterMobileNo(Context context,int meetId) {
 
